@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
         fontWeight: 700,
     },
     gradientText: {
-        flex: 1,
         position: 'absolute'
     }
 });

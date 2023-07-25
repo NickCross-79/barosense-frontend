@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import BaroTracker from './components/baroTracker';
 import NewItem from './components/Home/NewItem/newItem';
+import FilterSearch from './components/filterSearch';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <StatusBar style="auto" />
       </View>
       <NewItem />
+      <FilterSearch />
     </ImageBackground>
   );
 }
