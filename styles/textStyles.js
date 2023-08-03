@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 
 const textStyles = StyleSheet.create({
     default: {
-        fontSize: 8,
+        fontSize: 9,
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
-        fontWeight: 600,
+        fontWeight: 500,
     },
     center: {
         alignSelf: 'center',
