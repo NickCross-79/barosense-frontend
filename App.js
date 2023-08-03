@@ -6,6 +6,7 @@ import AppLoading from 'expo-app-loading';
 import BaroTracker from './components/baroTracker';
 import NewItem from './components/Home/NewItem/newItem';
 import FilterSearch from './components/filterSearch';
+import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,6 +28,7 @@ export default function App() {
       </View>
       <NewItem />
       <FilterSearch />
+      <ThisWeeksItems />
     </ImageBackground>
   );
 }
