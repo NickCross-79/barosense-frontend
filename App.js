@@ -7,6 +7,7 @@ import BaroTracker from './components/baroTracker';
 import NewItem from './components/Home/NewItem/newItem';
 import FilterSearch from './components/filterSearch';
 import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
+import NavBar from './components/navBar';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -29,6 +30,7 @@ export default function App() {
       <NewItem />
       <FilterSearch />
       <ThisWeeksItems />
+      <NavBar />
     </ImageBackground>
   );
 }
