@@ -18,7 +18,7 @@ export default function baroTracker() {
                     source={require('../assets/icons/icon-location.png')}
                     style={styles.locationIcon}
                 />
-                <Text style={textStyles.h2}>Strata Relay (Earth)</Text>
+                <Text style={[textStyles.h2, {marginTop: 2}]}>Strata Relay (Earth)</Text>
             </View>
         </View>
     );
