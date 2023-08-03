@@ -1,6 +1,6 @@
 import {Svg, LinearGradient, Text, Defs, Stop, TSpan} from 'react-native-svg';
 
-export default function gradientText() {
+export default function GradientText() {
     return(
         <Svg viewBox="0 0 300 300" height="300"
              width="300">

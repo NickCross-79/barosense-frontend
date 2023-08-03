@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Image } from "react-native";
 import textStyles from "../styles/textStyles";
 
-export default function baroTracker() {
+export default function BaroTracker() {
     return (
         <View style={styles.content}>
             

@@ -1,8 +1,8 @@
 import { Text, View, StyleSheet, Image} from "react-native";
 import textStyles from "../../../styles/textStyles";
-import gradientText from "./gradientText";
+import GradientText from "./gradientText";
 
-export default function newItem() {
+export default function NewItem() {
     return(
         <View style={styles.container}>
             <Image
