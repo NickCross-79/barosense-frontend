@@ -1,10 +1,21 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
+import AppLoading from 'expo-app-loading';
 import BaroTracker from './components/baroTracker';
 import NewItem from './components/Home/NewItem/newItem';
 import FilterSearch from './components/filterSearch';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Montserrat_400Regular
+  });
+
+  if(!fontsLoaded) {
+    return <AppLoading />
+  }
+
   return (
     <ImageBackground 
       source={require('./assets/backgrounds/background.png')}
@@ -26,7 +37,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   content: {
-    //flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

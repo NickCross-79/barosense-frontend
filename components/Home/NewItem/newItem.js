@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet, Image} from "react-native";
+import textStyles from "../../../styles/textStyles";
 import gradientText from "./gradientText";
 
 export default function newItem() {
@@ -9,7 +10,7 @@ export default function newItem() {
                 style={styles.backgroundImage}
             />
             
-            <Text style={styles.text}>Ki'Teer Reverence Ephemera</Text>
+            <Text style={[textStyles.h2, styles.text]}>Ki'Teer Reverence Ephemera</Text>
             <gradientText style={styles.gradientText} />
         </View>
     )
@@ -29,12 +30,9 @@ const styles = StyleSheet.create({
     },
     text: {
         flex: 1,
-        color: 'white',
         position: 'absolute',
         marginTop: 131,
         alignSelf: 'center',
-        fontSize: 16,
-        fontWeight: 700,
     },
     gradientText: {
         position: 'absolute'
