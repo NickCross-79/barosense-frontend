@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, Image} from "react-native";
-import textStyles from "../../../styles/textStyles";
 import GradientText from "./gradientText";
 
 export default function NewItem() {
@@ -9,9 +8,7 @@ export default function NewItem() {
                 source={require('../../../assets/backgrounds/newItemBackground.png')}
                 style={styles.backgroundImage}
             />
-            
-            <Text style={[textStyles.h2, styles.text]}>Ki'Teer Reverence Ephemera</Text>
-            <gradientText style={styles.gradientText} />
+            <GradientText text={"Ki'Teer Reverence Ephemera"} />
         </View>
     )
 }

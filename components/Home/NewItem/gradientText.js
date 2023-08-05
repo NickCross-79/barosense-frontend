@@ -1,22 +1,52 @@
-import {Svg, LinearGradient, Text, Defs, Stop, TSpan} from 'react-native-svg';
+import {View, Text, StyleSheet} from 'react-native'
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
+import textStyles from '../../../styles/textStyles';
 
-export default function GradientText() {
+export default function GradientText({text}) {
     return(
-        <Svg viewBox="0 0 300 300" height="300"
-             width="300">
-            <Defs>
-            <LinearGradient id="rainbow" x1="0" x2="0" y1="0" y2="100%" gradientUnits="userSpaceOnUse" >
-                <Stop stopColor="#FF5B99" offset="0%" />
-                <Stop stopColor="#FF5447" offset="20%" />
-                <Stop stopColor="#FF7B21" offset="40%" />
-                <Stop stopColor="#EAFC37" offset="60%" />
-                <Stop stopColor="#4FCB6B" offset="80%" />
-                <Stop stopColor="#51F7FE" offset="100%" />
-            </LinearGradient>
-            </Defs>
-            <Text fill="url(#rainbow)">
-                <TSpan fonSize="16" x="0" dy="72">Test Text</TSpan>
-            </Text>
-        </Svg>
+        <MaskedView
+            style={styles.mask}
+            maskElement={
+                <View style={styles.content}>
+                    <Text style={styles.text}>{text}</Text>
+                </View>
+            }
+        >
+            
+            <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x:1, y:0.7}}
+                style={styles.gradient}
+                locations={[0.0532, 0.8529]}
+                colors={['#F0EFF4', '#CFE006']}
+            />
+        </MaskedView>
     )
 }
+
+const styles = StyleSheet.create({
+    mask: {
+        position: 'absolute',
+        flex: 1,
+        flexDirection: 'row',
+        height: '100%',
+        width: '100%',
+        marginTop: 64,
+    },
+    content: {
+        backgroundColor: 'transparent',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    gradient: {
+        flex: 1,
+        height: '100%',
+    },
+    text: {
+        fontSize: 16,
+        color: 'blue',
+        fontWeight: '700',
+    }
+})
