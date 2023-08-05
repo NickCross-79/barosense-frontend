@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native'; // Import ScrollView and SafeAreaView
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
@@ -8,8 +8,10 @@ import NewItem from './components/Home/NewItem/newItem';
 import FilterSearch from './components/filterSearch';
 import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
 import NavBar from './components/navBar';
+import axios from 'axios';
 
 export default function App() {
+
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
@@ -25,7 +27,7 @@ export default function App() {
         style={styles.backgroundImage}
       >
         <ScrollView contentContainerStyle={styles.content}>
-          <BaroTracker />
+          <BaroTracker nextDate={'2023-08-11T13:00:00.000Z'} active={false} />
           <NewItem />
           <FilterSearch />
           <ThisWeeksItems />
