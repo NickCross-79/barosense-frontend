@@ -4,7 +4,7 @@ import textStyles from '../styles/textStyles';
 
 const rem = 16; // Define your base rem size
 
-export default function BaroTracker({nextDate, active}) {
+export default function BaroTracker({nextDate="Unknown", active=false, location="Unknown"}) {
   const nextDateObj = new Date(nextDate);
   const [countDown, setCountDown] = useState(calculateCountdown(nextDateObj));
 
@@ -21,7 +21,7 @@ export default function BaroTracker({nextDate, active}) {
     const now = new Date();
     const diffInMillis = Math.max(target - now, 0);
     const days = Math.floor(diffInMillis / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diffInMillis % (1000 * 60 * 60)) / (1000 * 60 * 60));
+    const hours = Math.floor((diffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diffInMillis % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diffInMillis % (1000 * 60)) / 1000);
     return {days, hours, minutes, seconds};
@@ -43,7 +43,7 @@ export default function BaroTracker({nextDate, active}) {
           style={styles.locationIcon}
         />
         <Text style={[textStyles.h2, { marginTop: Platform.OS === 'ios' ? 0.125 * rem : 0 }]}>
-          Strata Relay (Earth)
+          {location}
         </Text>
       </View>
     </View>

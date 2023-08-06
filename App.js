@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native'; // Import ScrollView and SafeAreaView
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
@@ -9,12 +9,26 @@ import FilterSearch from './components/filterSearch';
 import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
 import NavBar from './components/navBar';
 import axios from 'axios';
+import {SERVER_ADDRESS} from '@env';
 
 export default function App() {
-
+  const [baroData, setBaroData] = useState(null);
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
+  
+
+  useEffect(() => {
+    async function fetchBaroData() {
+      try {
+        const response = await axios.get(SERVER_ADDRESS+'/api/baro');
+        setBaroData(response.data);
+      } catch (err) {
+        console.error('Error fetching baroData:',err);
+      }
+    }
+    fetchBaroData();
+  }, []);
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -26,8 +40,9 @@ export default function App() {
         source={require('./assets/backgrounds/background.png')}
         style={styles.backgroundImage}
       >
+        
         <ScrollView contentContainerStyle={styles.content}>
-          <BaroTracker nextDate={'2023-08-11T13:00:00.000Z'} active={false} />
+          <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />
           <NewItem />
           <FilterSearch />
           <ThisWeeksItems />
