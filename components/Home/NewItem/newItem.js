@@ -8,6 +8,7 @@ export default function NewItem() {
                 source={require('../../../assets/backgrounds/newItemBackground.png')}
                 style={styles.backgroundImage}
             />
+            <Text style={styles.newItemImage}>Image</Text>
             <GradientText text={"Ki'Teer Reverence Ephemera"} />
         </View>
     )
@@ -24,6 +25,10 @@ const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
+    },
+    newItemImage: {
+        position: 'absolute',
+        color: 'white',
     },
     text: {
         flex: 1,

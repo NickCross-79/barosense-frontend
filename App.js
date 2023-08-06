@@ -42,7 +42,7 @@ export default function App() {
       >
         
         <ScrollView contentContainerStyle={styles.content}>
-          <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />
+          {baroData && <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />}
           <NewItem />
           <FilterSearch />
           <ThisWeeksItems />
