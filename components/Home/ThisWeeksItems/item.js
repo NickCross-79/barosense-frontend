@@ -5,14 +5,17 @@ import textStyles from '../../../styles/textStyles';
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function Item({name="empty", credits="999", ducats="999"}) {
+export default function Item({name="empty", image=null, credits="999", ducats="999"}) {
   return (
     <View style={styles.container}>
       {/*Upper*/}
       <View style={[componentStyles.container, styles.itemUpper, styles.rowContainer]}>
         {/*Left*/}
         <View style={styles.leftContainer}>
-          <Text>Image</Text>
+          <Image
+            source={{uri: `data:image/jpeg;base64,${image}`}}
+            style={styles.thumbnail}
+          />
         </View>
 
         {/*Right*/}
@@ -106,4 +109,8 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.04, // Responsive width based on device width
     height: windowWidth * 0.04, // Responsive height based on device width
   },
+  thumbnail: {
+    width: 50,
+    height: 50,
+  }
 });

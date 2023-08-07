@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     },
     newItemImage: {
         position: 'absolute',
-        width: 110,
-        height: 110,
+        width: 120,
+        height: 120,
         alignSelf: 'center',
         marginTop: 5,
     },

@@ -13,7 +13,8 @@ import {SERVER_ADDRESS} from '@env';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
-  const [imageData, setImageData] = useState(null);
+  const [items, setItems] = useState(null);
+  const [newItem, setNewItem] = useState(null);
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
@@ -23,9 +24,11 @@ export default function App() {
     async function fetchBaroData() {
       try {
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
-        const itemData = await axios.get(SERVER_ADDRESS+'/api/items/Jolt');
+        const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
+        const newItemData = await axios.get(SERVER_ADDRESS+`/api/items/Karishh's Dinnerware`);
         setBaroData(baroDataResp.data);
-        setImageData(itemData.data);
+        setItems(itemData.data.items);
+        setNewItem(newItemData.data);
       } catch (err) {
         console.error('Error fetching baroData:',err);
       }
@@ -46,9 +49,9 @@ export default function App() {
         
         <ScrollView contentContainerStyle={styles.content}>
           {baroData && <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />}
-          {imageData && <NewItem image={imageData.thumbnail} name={imageData.name} />}
+          {newItem && <NewItem image={newItem.thumbnail} name={newItem.name} />}
           <FilterSearch />
-          <ThisWeeksItems />
+          {items && <ThisWeeksItems items={items} />}
         </ScrollView>
         <NavBar />
         <StatusBar style="auto" />

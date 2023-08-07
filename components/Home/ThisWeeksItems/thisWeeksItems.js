@@ -2,26 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, ScrollView, Platform, FlatList } from 'react-native';
 import textStyles from '../../../styles/textStyles';
 import Item from './item';
-import axios from 'axios';
 
-const server = 'https://5aaf-174-95-62-172.ngrok-free.app/api/items';
-
-export default function ThisWeeksItems() {
-
-  const [items, setItems] = useState(null);
-
-  useEffect(() => {
-    async function getData() {
-      const response = await axios.get(server);
-      console.log(response.data.items);
-      setItems(response.data.items);
-    }
-
-    getData();
-  }, []);
-
+export default function ThisWeeksItems({items=null}) {
   const renderItem = ({item}) => (
-    <Item name={item.name} credits={item.credit_price} ducats={item.ducat_price}/>
+    <Item name={item.name} image={item.thumbnail} credits={item.credit_price} ducats={item.ducat_price}/>
   )
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -31,7 +15,7 @@ export default function ThisWeeksItems() {
           renderItem={renderItem}
           keyExtractor={(item) => item.name}
           numColumns={2}
-          contentContainerStyle={styles.container}
+          contentContainerStyle={styles.itemContainer}
         />
     </ScrollView>
   );
@@ -57,7 +41,6 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     alignItems: 'center',
-    flexDirection: 'row',
     justifyContent: 'space-between', // Distribute items evenly
     paddingHorizontal: 20, // Add horizontal padding
   },
