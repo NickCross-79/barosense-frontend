@@ -25,7 +25,7 @@ export default function App() {
       try {
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
-        const newItemData = await axios.get(SERVER_ADDRESS+`/api/items/Karishh's Dinnerware`);
+        const newItemData = await axios.get(SERVER_ADDRESS+`/api/items/newItem`);
         setBaroData(baroDataResp.data);
         setItems(itemData.data.items);
         setNewItem(newItemData.data);
