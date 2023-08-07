@@ -13,6 +13,7 @@ import {SERVER_ADDRESS} from '@env';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
+  const [imageData, setImageData] = useState(null);
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
@@ -21,8 +22,10 @@ export default function App() {
   useEffect(() => {
     async function fetchBaroData() {
       try {
-        const response = await axios.get(SERVER_ADDRESS+'/api/baro');
-        setBaroData(response.data);
+        const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
+        const itemData = await axios.get(SERVER_ADDRESS+'/api/items/Jolt');
+        setBaroData(baroDataResp.data);
+        setImageData(itemData.data);
       } catch (err) {
         console.error('Error fetching baroData:',err);
       }
@@ -43,7 +46,7 @@ export default function App() {
         
         <ScrollView contentContainerStyle={styles.content}>
           {baroData && <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />}
-          <NewItem />
+          {imageData && <NewItem image={imageData.thumbnail} name={imageData.name} />}
           <FilterSearch />
           <ThisWeeksItems />
         </ScrollView>

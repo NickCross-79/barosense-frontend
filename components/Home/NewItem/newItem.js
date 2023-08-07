@@ -1,15 +1,18 @@
-import { Text, View, StyleSheet, Image} from "react-native";
+import { Text, View, StyleSheet, Image, ScrollView} from "react-native";
 import GradientText from "./gradientText";
 
-export default function NewItem() {
+export default function NewItem({image=null, name='Item not Available'}) {
     return(
         <View style={styles.container}>
             <Image
                 source={require('../../../assets/backgrounds/newItemBackground.png')}
                 style={styles.backgroundImage}
             />
-            <Text style={styles.newItemImage}>Image</Text>
-            <GradientText text={"Ki'Teer Reverence Ephemera"} />
+            <Image
+                source={{uri: `data:image/jpeg;base64,${image}`}}
+                style={styles.newItemImage}
+            />
+            <GradientText text={name} />
         </View>
     )
 }
@@ -28,7 +31,10 @@ const styles = StyleSheet.create({
     },
     newItemImage: {
         position: 'absolute',
-        color: 'white',
+        width: 110,
+        height: 110,
+        alignSelf: 'center',
+        marginTop: 5,
     },
     text: {
         flex: 1,
