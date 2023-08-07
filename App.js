@@ -19,6 +19,7 @@ export default function App() {
     Montserrat_400Regular
   });
   
+  const activeState = true;
 
   useEffect(() => {
     async function fetchBaroData() {
@@ -46,13 +47,15 @@ export default function App() {
         source={require('./assets/backgrounds/background.png')}
         style={styles.backgroundImage}
       >
-        
-        <ScrollView contentContainerStyle={styles.content}>
-          {baroData && <BaroTracker nextDate={baroData.activation} active={baroData.active} location={baroData.location} />}
-          {newItem && <NewItem image={newItem.thumbnail} name={newItem.name} />}
-          <FilterSearch />
-          {items && <ThisWeeksItems items={items} />}
-        </ScrollView>
+        {!activeState && <BaroTracker nextDate={baroData.activation} active={activeState} location={baroData.location} />}
+        {activeState && (<>
+          <ScrollView contentContainerStyle={styles.content}>
+            {baroData && <BaroTracker nextDate={baroData.activation} active={activeState} location={baroData.location} />}
+            {newItem && <NewItem image={newItem.thumbnail} name={newItem.name} />}
+            <FilterSearch />
+            {items && <ThisWeeksItems items={items} />}
+          </ScrollView>
+        </>)}
         <NavBar />
         <StatusBar style="auto" />
       </ImageBackground>
