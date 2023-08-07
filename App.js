@@ -30,6 +30,7 @@ export default function App() {
         setBaroData(baroDataResp.data);
         setItems(itemData.data.items);
         setNewItem(newItemData.data);
+        console.log(baroDataResp.data.expiry)
       } catch (err) {
         console.error('Error fetching baroData:',err);
       }
@@ -47,10 +48,10 @@ export default function App() {
         source={require('./assets/backgrounds/background.png')}
         style={styles.backgroundImage}
       >
-        {!activeState && <BaroTracker nextDate={baroData.activation} active={activeState} location={baroData.location} />}
+        {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
         {activeState && (<>
           <ScrollView contentContainerStyle={styles.content}>
-            {baroData && <BaroTracker nextDate={baroData.activation} active={activeState} location={baroData.location} />}
+            {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
             {newItem && <NewItem image={newItem.thumbnail} name={newItem.name} />}
             <FilterSearch />
             {items && <ThisWeeksItems items={items} />}

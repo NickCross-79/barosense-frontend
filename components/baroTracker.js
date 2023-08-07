@@ -4,16 +4,22 @@ import textStyles from '../styles/textStyles';
 
 const rem = 16; // Define your base rem size
 
-export default function BaroTracker({nextDate="Unknown", active=false, location="Unknown"}) {
+export default function BaroTracker({nextDate=null, expiry=null, active=false, location="Unknown"}) {
   const nextDateObj = new Date(nextDate);
+  const expiryObj = new Date(expiry);
   const [countDown, setCountDown] = useState(calculateCountdown(nextDateObj));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newCountdown = calculateCountdown(nextDateObj);
-      setCountDown(newCountdown);
+      if(!active) {
+        const newCountdown = calculateCountdown(nextDateObj);
+        setCountDown(newCountdown);
+      } else {
+        const newCountdown = calculateCountdown(expiryObj);
+        setCountDown(newCountdown);
+      }
     }, 1000);
-
+    
     return () => clearInterval(interval);
   }, [nextDateObj]);
 
