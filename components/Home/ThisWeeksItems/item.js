@@ -1,45 +1,36 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, Platform, Dimensions } from 'react-native';
+import IconDucats from '../../../assets/icons/icon_ducats.png';
+import IconCredits from '../../../assets/icons/icon_credits.png';
 import componentStyles from '../../../styles/componentStyles';
 import textStyles from '../../../styles/textStyles';
 
 const windowWidth = Dimensions.get('window').width;
 
+const rem = 16;
+
 export default function Item({name="empty", image=null, credits="999", ducats="999"}) {
   return (
     <View style={styles.container}>
-      {/*Upper*/}
-      <View style={[componentStyles.container, styles.itemUpper, styles.rowContainer]}>
-        {/*Left*/}
-        <View style={styles.leftContainer}>
+      <Image
+        source={{uri: `data:image/jpeg;base64,${image}`}}
+        style={styles.image}
+      />
+      <View>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.category}>{name}</Text>
+        <View style={[styles.rowContainer,{marginTop: 0.5625 * rem}]}>
           <Image
-            source={{uri: `data:image/jpeg;base64,${image}`}}
-            style={styles.thumbnail}
+            source={IconDucats}
+            style={styles.icon}
           />
+          <Text style={[textStyles.h3, styles.price]}>{ducats}</Text>
+          <Image
+            source={IconCredits}
+            style={styles.icon}
+          />
+          <Text style={[textStyles.h3, styles.price]}>{credits}</Text>
         </View>
-
-        {/*Right*/}
-        <View style={styles.rightContainer}>
-          <View style={styles.rowContainer}>
-            <Image
-              source={require('../../../assets/icons/credits_icon.png')}
-              style={styles.icon}
-            />
-            <Text style={[textStyles.default, styles.price]}>{credits}</Text>
-          </View>
-          <View style={styles.rowContainer}>
-            <Image
-              source={require('../../../assets/icons/ducats_icon.png')}
-              style={styles.icon}
-            />
-            <Text style={[textStyles.default, styles.price]}>{ducats}</Text>
-          </View>
-        </View>
-      </View>
-
-      {/*Lower*/}
-      <View style={[componentStyles.container, styles.itemLower]}>
-        <Text style={[textStyles.default, styles.name]}>{name}</Text>
       </View>
     </View>
   );
@@ -47,70 +38,40 @@ export default function Item({name="empty", image=null, credits="999", ducats="9
 
 const styles = StyleSheet.create({
   container: {
-    margin: windowWidth * 0.02, // Responsive margin based on device width
-  },
-  itemUpper: {
-    width: windowWidth * 0.4, // Responsive width based on device width
-    height: windowWidth * 0.17, // Responsive height based on device width
-    zIndex: 1,
-    borderRadius: windowWidth * 0.02, // Responsive borderRadius based on device width
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 4 },
-        shadowRadius: 4,
-        shadowOpacity: 0.25,
-      },
-      android: {
-        elevation: 4,
-      },
-    }),
-  },
-  leftContainer: {
-    flex: 1,
-    justifyContent: 'center',
+    width: 21.5625 * rem,
+    height: 5.4375 * rem,
+    borderRadius: 8,
+    backgroundColor: '#213235',
+    marginBottom: rem,
+    padding: 0.5 * rem,
+    flexDirection: 'row',
     alignItems: 'center',
   },
-  rightContainer: {
-    flex: 1,
-    paddingRight: windowWidth * 0.035, // Responsive paddingRight based on device width
-    paddingTop: windowWidth * 0.036, // Responsive paddingTop based on device width
-  },
-  itemLower: {
-    width: windowWidth * 0.4, // Responsive width based on device width
-    height: windowWidth * 0.13, // Responsive height based on device width
-    marginTop: -windowWidth * 0.074, // Responsive marginTop based on device width
-    borderRadius: windowWidth * 0.02, // Responsive borderRadius based on device width
-    backgroundColor: 'rgba(45,72,77,0.80)',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  name: {
-    marginBottom: windowWidth * 0.013, // Responsive marginBottom based on device width
-    ...Platform.select({
-      ios: {
-        textShadowOffset: { width: 0, height: 4 },
-      },
-      android: {
-        textShadowRadius: 4,
-        textShadowColor: 'black',
-      },
-    }),
+  image: {
+    width: 4.4375 * rem,
+    height: 4.4375 * rem,
+    marginRight: 1.0625 * rem
   },
   rowContainer: {
-    flex: 1,
     flexDirection: 'row',
   },
   price: {
-    marginLeft: windowWidth * 0.014, // Responsive marginLeft based on device width
-    marginBottom: windowWidth * 0.035, // Responsive marginBottom based on device width
+    fontWeight: 'bold',
+    marginRight: 2.8125 * rem,
+    marginLeft: 0.1875 * rem,
+  },
+  name: {
+    fontSize: 0.875 * rem,
+    color: '#F0EFF4',
+    fontWeight: '600'
+  },
+  category: {
+    fontSize: 0.875 * rem,
+    color: '#7D9699',
+    fontWeight: '600'
   },
   icon: {
-    width: windowWidth * 0.04, // Responsive width based on device width
-    height: windowWidth * 0.04, // Responsive height based on device width
-  },
-  thumbnail: {
-    width: 50,
-    height: 50,
+    width: rem,
+    height: rem,
   }
 });

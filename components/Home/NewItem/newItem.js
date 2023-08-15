@@ -1,46 +1,72 @@
-import { Text, View, StyleSheet, Image, ScrollView} from "react-native";
-import GradientText from "./gradientText";
+import { Text, View, StyleSheet, Image, ScrollView, ImageBackground} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import BackgroundNewItem from '../../../assets/backgrounds/background_newItem.png'
+import NewItemBadge from "./newItemBadge";
+import textStyles from "../../../styles/textStyles";
 
-export default function NewItem({image=null, name='Item not Available'}) {
+const rem = 16;
+
+export default function NewItem({item=null}) {
     return(
-        <View style={styles.container}>
-            <Image
-                source={require('../../../assets/backgrounds/newItemBackground.png')}
-                style={styles.backgroundImage}
-            />
-            <Image
-                source={{uri: `data:image/jpeg;base64,${image}`}}
-                style={styles.newItemImage}
-            />
-            <GradientText text={name} />
-        </View>
+        <ImageBackground
+            source={BackgroundNewItem}
+            style={styles.container}
+            imageStyle={styles.imageBackground}
+            blurRadius={8}
+        >
+            {item.thumbnail != undefined && <Image
+                    source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+                    style={styles.newItemImage}
+                />}
+            <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x:0, y:1}}
+                locations={[0, 1]}
+                style={styles.overlay}
+                colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.60)']}
+            >   
+                <NewItemBadge />
+                {item.name != undefined && <Text style={styles.name}>{item.name}</Text>}
+                {item.name != undefined && <Text style={styles.category}>{item.name}</Text>}
+            </LinearGradient>
+        </ImageBackground>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 29,
-        width: 251,
-        height: 157,
+        marginTop: 1.5 * rem,
+        width: 21.5625 * rem,
+        height: 8.6875 * rem,
         alignSelf: 'center',
-        borderRadius: 10,
     },
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover',
+    imageBackground: {
+        borderRadius: 8,
+    },
+    overlay: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 2,
+        padding: 0.75 * rem
     },
     newItemImage: {
-        position: 'absolute',
         width: 120,
         height: 120,
         alignSelf: 'center',
-        marginTop: 5,
     },
-    text: {
-        flex: 1,
-        position: 'absolute',
-        marginTop: 131,
-        alignSelf: 'center',
+    name: {
+        fontSize: rem,
+        marginTop: 50,
+        color: "#F0EFF4",
+        fontFamily: "Montserrat_400Regular",
+        fontWeight: 'bold',
+    },
+    category: {
+        fontSize: rem,
+        color: "#7D9699",
+        fontFamily: "Montserrat_400Regular",
+        fontWeight: 'bold',
     },
     gradientText: {
         position: 'absolute'

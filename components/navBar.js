@@ -1,85 +1,43 @@
 import React from "react";
-import { View, StyleSheet, Platform, Dimensions, Image } from "react-native";
-import Svg, { Image as SvgImage } from "react-native-svg"; // Import the necessary components
-import componentStyles from "../styles/componentStyles";
+import { Text,View, StyleSheet, Platform, Dimensions, Image } from "react-native";
+import { BlurView } from "expo-blur";
+import IconHomeActive from '../assets/icons/icon_home_active.svg';
+import IconHeartInactive from '../assets/icons/icon_heart_inactive.svg';
+import IconListInactive from '../assets/icons/icon_list_inactive.svg';
+import IconSettingsInactive from '../assets/icons/icon_settings_inactive.svg';
+
 
 const windowWidth = Dimensions.get('window').width;
+const rem = 16;
 
 export default function NavBar() {
     return (
-        <View style={[componentStyles.container, styles.container]}>
-            <Image
-              source={require('../assets/icons/home_icon.png')}
-              style={styles.icon}
-            />
-            <CustomSvg
-                source={require('../assets/icons/home_icon.svg')}
-                style={styles.icon}
-            />
-            <Image
-              source={require('../assets/icons/folderfavorite_icon.png')}
-              style={styles.icon}
-            />
-            <CustomSvg
-                source={require('../assets/icons/folderfavorite_icon.svg')}
-                style={styles.icon}
-            />
-            <Image
-              source={require('../assets/icons/archive_icon.png')}
-              style={styles.icon}
-            />
-            <CustomSvg
-                source={require('../assets/icons/archive_icon.svg')}
-                style={styles.icon}
-            />
-        </View>
+        <BlurView 
+            style={styles.container}
+            intensity={6}
+        >
+            <IconHomeActive style={styles.icon}/>
+            <IconHeartInactive style={styles.icon}/>
+            <IconListInactive style={styles.icon}/>
+            <IconSettingsInactive style={styles.icon}/>
+        </BlurView>
     );
 }
-
-const CustomSvg = ({ source, style }) => {
-    return (
-        <View style={style}>
-            <Svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 39 39" // Specify the viewBox for the SVG
-            >
-                <SvgImage
-                    width="100%"
-                    height="100%"
-                    xlinkHref={source}
-                />
-            </Svg>
-        </View>
-    );
-};
 
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: windowWidth * 0.2,
+        backgroundColor: 'rgba(0, 0, 0, 0.80)',
+        height: 4.25 * rem,
         position: 'absolute',
         bottom: 0,
-        borderRadius:0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingLeft: 40,
-        paddingTop: 20,
-        ...Platform.select({
-            ios: {
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: -2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
-            },
-            android: {
-                elevation: 8,
-            },
-        }),
+        paddingHorizontal: 2 * rem,
+        paddingTop: 1.4 * rem,
     },
     icon: {
-        //flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: 1.75 * rem,
+        height: 1.75 * rem
     },
 });

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, Platform } from 'react-native';
 import textStyles from '../styles/textStyles';
+import IconTime from '../assets/icons/icon_time.svg'
+import IconLocation from '../assets/icons/icon_location.svg'
 
 const rem = 16; // Define your base rem size
 
@@ -35,20 +37,14 @@ export default function BaroTracker({nextDate=null, expiry=null, active=false, l
 
   return (
     <View style={styles.content}>
-      <Text style={[textStyles.h2, { marginBottom: 0.375 * rem }]}>Baro Ki'Teer {active ? 'departs' : 'arrives'} in:</Text>
+      <Text style={[textStyles.h1, { color: '#D8E778', marginBottom: 0.5625 * rem }]}>Baro Ki'Teer {active ? 'Departs' : 'Arrives'} in</Text>
       <View style={styles.rowContainer}>
-        <Image
-          source={require('../assets/icons/icon-timer-1.png')}
-          style={styles.timerIcon}
-        />
-        <Text style={[textStyles.h1, { marginBottom: 0.1875 * rem }]}>{countDown.days}d {countDown.hours}h {countDown.minutes}m {countDown.seconds}s</Text>
+        <IconTime width={rem} height={rem} />
+        <Text style={[textStyles.h1, {fontWeight: 500, marginLeft: 0.5 * rem}]}>{countDown.days}d {countDown.hours}h {countDown.minutes}m {countDown.seconds}s</Text>
       </View>
       <View style={styles.rowContainer}>
-        <Image
-          source={require('../assets/icons/icon-location.png')}
-          style={styles.locationIcon}
-        />
-        <Text style={[textStyles.h2, { marginTop: Platform.OS === 'ios' ? 0.125 * rem : 0 }]}>
+        <IconLocation width={rem} height={rem} />
+        <Text style={[textStyles.h1, { fontWeight: 500, marginLeft: 0.5 * rem }]}>
           {location}
         </Text>
       </View>
@@ -58,20 +54,27 @@ export default function BaroTracker({nextDate=null, expiry=null, active=false, l
 
 const styles = StyleSheet.create({
   content: {
-    paddingVertical: 0.9375 * rem,
-    paddingHorizontal: 1.25 * rem,
-    marginTop: 1.25 * rem,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 0.125 * rem },
-        shadowOpacity: 0.1,
-        shadowRadius: 0.25 * rem,
-      },
-      android: {
-        elevation: 0.5 * rem,
-      },
-    }),
+    marginTop: 1.5 * rem,
+    backgroundColor: '#213235',
+    width: 21.5625 * rem,
+    height: 6.0625 * rem,
+    borderRadius: 8,
+    paddingHorizontal: 0.6875 * rem,
+    paddingVertical: 0.5 * rem,
+    // paddingVertical: 0.9375 * rem,
+    // paddingHorizontal: 1.25 * rem,
+    // marginTop: 1.25 * rem,
+    // ...Platform.select({
+    //   ios: {
+    //     shadowColor: '#000',
+    //     shadowOffset: { width: 0, height: 0.125 * rem },
+    //     shadowOpacity: 0.1,
+    //     shadowRadius: 0.25 * rem,
+    //   },
+    //   android: {
+    //     elevation: 0.5 * rem,
+    //   },
+    // }),
   },
   timerIcon: {
     width: 1.8125 * rem,
@@ -87,6 +90,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 0.5625 * rem,
   },
 });
 

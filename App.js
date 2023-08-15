@@ -25,13 +25,14 @@ export default function App() {
     async function fetchBaroData() {
       try {
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
+        const newItemData = await axios.get(SERVER_ADDRESS+`/api/baro/inventory/newItem`);
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
-        const newItemData = await axios.get(SERVER_ADDRESS+`/api/items/newItem`);
         setBaroData(baroDataResp.data);
         setItems(itemData.data.items);
         setNewItem(newItemData.data);
-        console.log(baroDataResp.data.expiry)
       } catch (err) {
+        const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
+        //setBaroData(baroDataResp.data);
         console.error('Error fetching baroData:',err);
       }
     }
@@ -44,22 +45,16 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
-        source={require('./assets/backgrounds/background.png')}
-        style={styles.backgroundImage}
-      >
         {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
         {activeState && (<>
           <ScrollView contentContainerStyle={styles.content}>
             {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-            {newItem && <NewItem image={newItem.thumbnail} name={newItem.name} />}
-            <FilterSearch />
+            {newItem && <NewItem item={newItem}/>}
             {items && <ThisWeeksItems items={items} />}
           </ScrollView>
         </>)}
         <NavBar />
         <StatusBar style="auto" />
-      </ImageBackground>
     </SafeAreaView>
   );
 }
@@ -67,7 +62,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white', // Set a background color to SafeAreaView
+    backgroundColor: 'black', // Set a background color to SafeAreaView
   },
   backgroundImage: {
     flex: 1,
@@ -76,6 +71,6 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 20, // Add some top padding for better spacing
+    padding: 24, // Add some top padding for better spacing
   },
 });
