@@ -1,13 +1,11 @@
 import React from "react";
-import { Text,View, StyleSheet, Platform, Dimensions, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import IconHomeActive from '../assets/icons/icon_home_active.svg';
 import IconHeartInactive from '../assets/icons/icon_heart_inactive.svg';
 import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 import IconSettingsInactive from '../assets/icons/icon_settings_inactive.svg';
 
-
-const windowHeight = Dimensions.get('window').height;
 const rem = 16;
 
 export default function NavBar() {
