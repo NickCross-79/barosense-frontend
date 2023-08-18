@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, ScrollView, Platform, FlatList } from 'react-native';
 import textStyles from '../../../styles/textStyles';
 import IconFilter from '../../../assets/icons/icon_filter.svg';
-import Item from './item';
+import Item from '../../Item/item';
 
 const rem = 16;
 
 export default function ThisWeeksItems({items=null}) {
   const renderItem = ({item}) => (
-    <Item name={item.name} image={item.thumbnail} credits={item.credit_price} ducats={item.ducat_price}/>
+    <Item item={item} name={item.name} image={item.thumbnail} credits={item.credit_price} ducats={item.ducat_price}/>
   )
   return (
     <>
-      <View style={styles.rowContainer}>
+      <View style={[styles.rowContainer, {marginBottom: 10}]}>
         <Text style={[textStyles.h1, styles.header]}>This Week's Items</Text>
         <IconFilter />
         <Text style={styles.filter}>Filters</Text>

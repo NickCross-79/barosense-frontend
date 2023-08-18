@@ -27,7 +27,7 @@ export default function NewItem({item=null}) {
             >   
                 <NewItemBadge />
                 {item.name != undefined && <Text style={styles.name}>{item.name}</Text>}
-                {item.name != undefined && <Text style={styles.category}>{item.name}</Text>}
+                {item.name != undefined && <Text style={styles.category}>{item.type}</Text>}
             </LinearGradient>
         </ImageBackground>
     )

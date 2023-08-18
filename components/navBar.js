@@ -7,7 +7,7 @@ import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 import IconSettingsInactive from '../assets/icons/icon_settings_inactive.svg';
 
 
-const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const rem = 16;
 
 export default function NavBar() {
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.80)',
         height: 4.25 * rem,
         position: 'absolute',
+        zIndex: 3,
         bottom: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',

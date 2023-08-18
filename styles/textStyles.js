@@ -19,7 +19,7 @@ const textStyles = StyleSheet.create({
         fontWeight: '700',
     },
     h3: {
-        fontSize: 0.75 * rem,
+        fontSize: 0.75 * rem, //12
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
     },

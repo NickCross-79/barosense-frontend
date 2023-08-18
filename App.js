@@ -5,11 +5,11 @@ import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 import BaroTracker from './components/baroTracker';
 import NewItem from './components/Home/NewItem/newItem';
-import FilterSearch from './components/filterSearch';
 import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
 import NavBar from './components/navBar';
 import axios from 'axios';
 import {SERVER_ADDRESS} from '@env';
+import ItemDetails from './components/Item/Item_Overview/itemDetails';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
@@ -25,6 +25,7 @@ export default function App() {
     async function fetchBaroData() {
       try {
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
+        //console.log(SERVER_ADDRESS)
         const newItemData = await axios.get(SERVER_ADDRESS+`/api/baro/inventory/newItem`);
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
         setBaroData(baroDataResp.data);
@@ -32,7 +33,7 @@ export default function App() {
         setNewItem(newItemData.data);
       } catch (err) {
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
-        //setBaroData(baroDataResp.data);
+        setBaroData(baroDataResp.data);
         console.error('Error fetching baroData:',err);
       }
     }
@@ -45,16 +46,20 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+        {!<ItemDetails />}
+        <>
         {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+        {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+        {newItem && <NewItem item={newItem}/>}
+        
         {activeState && (<>
-          <ScrollView contentContainerStyle={styles.content}>
-            {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-            {newItem && <NewItem item={newItem}/>}
+          <View contentContainerStyle={styles.content}>
             {items && <ThisWeeksItems items={items} />}
-          </ScrollView>
+          </View>
         </>)}
         <NavBar />
         <StatusBar style="auto" />
+        </>
     </SafeAreaView>
   );
 }
@@ -62,6 +67,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: 'black', // Set a background color to SafeAreaView
   },
   backgroundImage: {
