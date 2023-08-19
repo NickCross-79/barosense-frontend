@@ -15,11 +15,21 @@ export default function App() {
   const [baroData, setBaroData] = useState(null);
   const [items, setItems] = useState(null);
   const [newItem, setNewItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
   
   const activeState = true;
+
+  const handleItemPress = (item) => {
+    console.log(item.name)
+    setSelectedItem(item);
+  }
+
+  const handleOverviewClose = () => {
+    setSelectedItem(null);
+  }
 
   useEffect(() => {
     async function fetchBaroData() {
@@ -46,7 +56,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-        {<ItemOverview />}
+        {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
         <>
         {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
         {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
@@ -54,7 +64,7 @@ export default function App() {
         
         {activeState && (<>
           <View contentContainerStyle={styles.content}>
-            {items && <ThisWeeksItems items={items} />}
+            {items && <ThisWeeksItems items={items} onItemPress={handleItemPress} />}
           </View>
         </>)}
         <NavBar />

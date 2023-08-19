@@ -6,10 +6,15 @@ import Item from '../../Item/item';
 
 const rem = 16;
 
-export default function ThisWeeksItems({items=null}) {
+export default function ThisWeeksItems({items=null, onItemPress=()=>{}}) {
   const renderItem = ({item}) => (
-    <Item item={item} name={item.name} image={item.thumbnail} credits={item.credit_price} ducats={item.ducat_price}/>
+    <Item item={item} onPress={handleItemPress}/>
   )
+
+  const handleItemPress = (item) => {
+    onItemPress(item);
+  }
+
   return (
     <>
       <View style={[styles.rowContainer, {marginBottom: 10}]}>
@@ -34,7 +39,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingTop: 20, // Add top padding for better spacing
-    paddingBottom: 50, // Add bottom padding for better spacing
+    paddingBottom: 350, // Add bottom padding for better spacing
   },
   rowContainer: {
     marginTop: 1.75 * rem,

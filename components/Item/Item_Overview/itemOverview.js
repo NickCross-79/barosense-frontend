@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { BlurView } from 'expo-blur';
 import IconClose from '../../../assets/icons/icon_close.svg';
 import textStyles from '../../../styles/textStyles';
@@ -9,20 +9,25 @@ import ItemCommentSection from './itemCommentSection';
 const rem = 16;
 const overlayHeight = Dimensions.get('window').height - (1.75 * rem);
 
-export default function ItemOverview({item=null}) {
+export default function ItemOverview({item=null, handleClose}) {
     return (
             <BlurView intensity={6} style={styles.blurOverlay}>
                 <View style={styles.content}>
-                    <IconClose style={{alignSelf: 'flex-end'}} />
-                    <View style={styles.itemImage}/>
+                    <TouchableOpacity onPress={() => handleClose()}>
+                        <IconClose style={{alignSelf: 'flex-end'}} />
+                    </TouchableOpacity>
+                    <Image
+                        source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+                        style={styles.itemImage}
+                    />
                     <View style={[styles.rowContainer,{marginTop: 1.25 * rem}]}>
-                        <Text style={textStyles.h1}>Ki'Teer Reverence Ephemera</Text>
+                        <Text style={textStyles.h1}>{item.name}</Text>
                         <View style={{borderRadius: 10, width: 4, height: 4, backgroundColor: '#7D9699', marginHorizontal: 7, marginTop: 3}} />
                         <Text style={[textStyles.h3,styles.wikiLink]}>See on wiki</Text>
                     </View>
-                    <Text style={[textStyles.h1, {color: '#7D9699'}]}>Cosmetic</Text>
+                    <Text style={[textStyles.h1, {color: '#7D9699'}]}>{item.type}</Text>
                     <ScrollView>
-                        <Text style={[textStyles.h2, styles.description]}>"Exemplify sophistication with every step."</Text>
+                        <Text style={[textStyles.h2, styles.description]}>{item.description}</Text>
                         
                         {/* Recommend */}
                         <RecommendedSection />
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
     itemImage: {
         width: 120,
         height: 120,
-        backgroundColor: 'white',
         alignSelf: 'center'
     },
     wikiLink: {

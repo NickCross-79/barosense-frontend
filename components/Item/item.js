@@ -1,37 +1,39 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, Platform, Dimensions } from 'react-native';
+import { Text, View, StyleSheet, Image, Platform, Dimensions, TouchableOpacity } from 'react-native';
 import IconDucats from '../../assets/icons/icon_ducats.png';
 import IconCredits from '../../assets/icons/icon_credits.png';
 import textStyles from '../../styles/textStyles';
 
-const windowWidth = Dimensions.get('window').width;
-
 const rem = 16;
 
-export default function Item({item=null}) {
+export default function Item({item=null, onPress}) {
   return (
+    <TouchableOpacity onPress={() => onPress(item)}>
     <View style={styles.container}>
-      <Image
-        source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
-        style={styles.image}
-      />
-      <View>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.category}>{item.type}</Text>
-        <View style={[styles.rowContainer,{marginTop: 0.5625 * rem}]}>
-          <Image
-            source={IconDucats}
-            style={styles.icon}
-          />
-          <Text style={[textStyles.h3, styles.price]}>{item.ducat_price}</Text>
-          <Image
-            source={IconCredits}
-            style={styles.icon}
-          />
-          <Text style={[textStyles.h3, styles.price]}>{item.credit_price}</Text>
+      
+        <Image
+          source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+          style={styles.image}
+        />
+        <View>
+          <Text style={styles.name}>{item.name}</Text>
+          <Text style={styles.category}>{item.type}</Text>
+          <View style={[styles.rowContainer,{marginTop: 0.5625 * rem}]}>
+            <Image
+              source={IconDucats}
+              style={styles.icon}
+            />
+            <Text style={[textStyles.h3, styles.price]}>{item.ducat_price}</Text>
+            <Image
+              source={IconCredits}
+              style={styles.icon}
+            />
+            <Text style={[textStyles.h3, styles.price]}>{item.credit_price}</Text>
+          </View>
         </View>
-      </View>
+      
     </View>
+    </TouchableOpacity>
   );
 }
 
