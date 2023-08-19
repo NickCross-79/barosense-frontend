@@ -23,7 +23,6 @@ export default function App() {
   const activeState = true;
 
   const handleItemPress = (item) => {
-    console.log(item.name)
     setSelectedItem(item);
   }
 

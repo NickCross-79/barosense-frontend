@@ -6,7 +6,7 @@ import IconFalse from '../../../assets/icons/icon_false.svg';
 
 const rem = 16;
 
-export default function ItemDetailsSection() {
+export default function ItemDetailsSection({item=null}) {
     return (
         <View>
             <View style={styles.horizontalSeperator}/>
@@ -16,7 +16,7 @@ export default function ItemDetailsSection() {
                     <View style={[styles.rowContainer, {justifyContent: 'space-between'}]}>
                         <View style={styles.rowContainer}>
                             <Image source={IconDucats} style={styles.icon}/>
-                            <Text style={[textStyles.h3, {marginRight: rem}]}>350</Text>
+                            <Text style={[textStyles.h3, {marginRight: rem}]}>{item.ducat_price}</Text>
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={textStyles.h3}>Tradable:</Text>
@@ -27,7 +27,7 @@ export default function ItemDetailsSection() {
                     <View style={[styles.rowContainer, {justifyContent: 'space-between'}]}>
                         <View style={styles.rowContainer}>
                             <Image source={IconCredits} style={styles.icon}/>
-                            <Text style={textStyles.h3}>300,000</Text>
+                            <Text style={textStyles.h3}>{item.credit_price}</Text>
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={textStyles.h3}>Mastery:</Text>
@@ -36,7 +36,7 @@ export default function ItemDetailsSection() {
                     </View>
                     <View style={[styles.rowContainer, {marginTop: 0.5625 * rem, alignSelf: 'center'}]}>
                         <Text style={[textStyles.h3, {marginRight: 0.5 * rem}]}>Last Appearance:</Text>
-                        <Text style={[textStyles.h3, {color: '#D8E778'}]}>2023-06-30</Text>
+                        <Text style={[textStyles.h3, {color: '#D8E778'}]}>{item.last_date === null ? '' : item.last_date.split('T')[0]}</Text>
                     </View>
             </View>
         </View>

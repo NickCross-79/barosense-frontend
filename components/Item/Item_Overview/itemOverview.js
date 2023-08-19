@@ -33,7 +33,7 @@ export default function ItemOverview({item=null, handleClose}) {
                         <RecommendedSection />
 
                         {/* Details */}
-                        <ItemDetailsSection />
+                        <ItemDetailsSection item={item} />
 
                         {/* Comments */}
 
