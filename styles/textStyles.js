@@ -4,7 +4,7 @@ const rem = 16;
 
 const textStyles = StyleSheet.create({
     default: {
-        fontSize: 8,
+        fontSize: 0.5 * rem,
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
         fontWeight: '800',
@@ -13,7 +13,7 @@ const textStyles = StyleSheet.create({
         alignSelf: 'center',
     },
     h4: {
-        fontSize: 11,
+        fontSize: 0.6875 * rem,
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
         fontWeight: '700',
@@ -24,13 +24,13 @@ const textStyles = StyleSheet.create({
         fontFamily: "Montserrat_400Regular",
     },
     h2: {
-        fontSize: 14,
+        fontSize: 0.875 * rem,
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
         fontWeight: '800',
     },
     h1: {
-        fontSize: 16,
+        fontSize: rem,
         color: "#F0EFF4",
         fontFamily: "Montserrat_400Regular",
         fontWeight: '800',
