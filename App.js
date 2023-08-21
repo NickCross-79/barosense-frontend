@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native'; // Import ScrollView and SafeAreaView
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
@@ -30,11 +30,18 @@ export default function App() {
     setSelectedItem(null);
   }
 
+  const thisWeeksItemsComponent = useMemo(() => {
+    if(items) {
+      return <ThisWeeksItems items={items} onItemPress={handleItemPress} />
+    }
+    return null
+  }, [items]);
+
   useEffect(() => {
     async function fetchBaroData() {
       try {
+        //console.log(SERVER_ADDRESS)
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
-        console.log(SERVER_ADDRESS)
         const newItemData = await axios.get(SERVER_ADDRESS+`/api/baro/inventory/newItem`);
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
         setBaroData(baroDataResp.data);
@@ -63,7 +70,8 @@ export default function App() {
         
         {activeState && (<>
           <View contentContainerStyle={styles.content}>
-            {items && <ThisWeeksItems items={items} onItemPress={handleItemPress} />}
+            {/*items && <ThisWeeksItems items={items} onItemPress={handleItemPress} />*/}
+            {thisWeeksItemsComponent}
           </View>
         </>)}
         <NavBar />

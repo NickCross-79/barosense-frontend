@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Text, View, StyleSheet, Image, Platform, Dimensions, TouchableOpacity } from 'react-native';
 import IconDucats from '../../assets/icons/icon_ducats.png';
 import IconCredits from '../../assets/icons/icon_credits.png';
@@ -6,7 +6,8 @@ import textStyles from '../../styles/textStyles';
 
 const rem = 16;
 
-export default function Item({item=null, onPress}) {
+const Item = ({item=null, onPress}) => {
+  console.log(item.id)
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
     <View style={styles.container}>
@@ -76,3 +77,5 @@ const styles = StyleSheet.create({
     height: rem,
   }
 });
+
+export default Item

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Text, View, StyleSheet, ScrollView, Platform, FlatList } from 'react-native';
 import textStyles from '../../../styles/textStyles';
 import IconFilter from '../../../assets/icons/icon_filter.svg';
@@ -6,7 +6,7 @@ import Item from '../../Item/item';
 
 const rem = 16;
 
-export default function ThisWeeksItems({items=null, onItemPress=()=>{}}) {
+const ThisWeeksItems = ({items=null, onItemPress=()=>{}}) => {
   const renderItem = ({item}) => (
     <Item item={item} onPress={handleItemPress}/>
   )
@@ -72,3 +72,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between', // Distribute items evenly
   },
 });
+
+export default ThisWeeksItems
