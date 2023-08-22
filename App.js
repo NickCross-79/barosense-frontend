@@ -65,9 +65,9 @@ export default function App() {
         <>
           {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
           {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-          {/*newItem*/false && <NewItem item={newItem} onPress={handleItemPress}/>}
-          <BaroPath />
-          {!activeState && (<>
+          {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
+          {false && <BaroPath />}
+          {activeState && (<>
             <View contentContainerStyle={styles.content}>
               {thisWeeksItemsComponent}
             </View>

@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 import IconHomeActive from '../assets/icons/icon_home_active.svg';
 import IconHeartInactive from '../assets/icons/icon_heart_inactive.svg';
 import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 import IconSettingsInactive from '../assets/icons/icon_settings_inactive.svg';
+import textStyles from "../styles/textStyles";
 
 const rem = 16;
 
@@ -14,10 +15,25 @@ export default function NavBar() {
             style={styles.container}
             intensity={6}
         >
-            <IconHomeActive style={styles.icon}/>
-            <IconHeartInactive style={styles.icon}/>
-            <IconListInactive style={styles.icon}/>
-            <IconSettingsInactive style={styles.icon}/>
+            <View style={styles.iconContainer}>
+                <IconHomeActive style={styles.icon}/>
+                <Text style={[textStyles.default, {marginTop: 4}]}>Home</Text>
+            </View>
+
+            <View style={styles.iconContainer}>
+                <IconHeartInactive style={styles.icon}/>
+                <Text style={[textStyles.default, {marginTop: 4, color: '#AEB5B9'}]}>Wish List</Text>
+            </View>
+
+            <View style={styles.iconContainer}>
+                <IconListInactive style={styles.icon}/>
+                <Text style={[textStyles.default, {marginTop: 4, color: '#AEB5B9'}]}>All Items</Text>
+            </View>
+
+            <View style={styles.iconContainer}>
+                <IconSettingsInactive style={styles.icon}/>
+                <Text style={[textStyles.default, {marginTop: 4, color: '#AEB5B9'}]}>Settings</Text>
+            </View>
         </BlurView>
     );
 }
@@ -39,4 +55,8 @@ const styles = StyleSheet.create({
         width: 1.75 * rem,
         height: 1.75 * rem
     },
+    iconContainer: {
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
 });
