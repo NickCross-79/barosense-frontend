@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet, ScrollView, Platform, FlatList } from 'react-native';
 import textStyles from '../../../styles/textStyles';
 import IconFilter from '../../../assets/icons/icon_filter.svg';

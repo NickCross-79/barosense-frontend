@@ -70,7 +70,6 @@ export default function App() {
         
         {activeState && (<>
           <View contentContainerStyle={styles.content}>
-            {/*items && <ThisWeeksItems items={items} onItemPress={handleItemPress} />*/}
             {thisWeeksItemsComponent}
           </View>
         </>)}

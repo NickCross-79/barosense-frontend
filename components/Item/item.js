@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { Text, View, StyleSheet, Image, Platform, Dimensions, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import IconDucats from '../../assets/icons/icon_ducats.png';
 import IconCredits from '../../assets/icons/icon_credits.png';
 import textStyles from '../../styles/textStyles';

@@ -2,7 +2,6 @@ import { Text, View, StyleSheet, Image, ScrollView, ImageBackground, TouchableOp
 import { LinearGradient } from "expo-linear-gradient";
 import BackgroundNewItem from '../../../assets/backgrounds/background_newItem.png'
 import NewItemBadge from "./newItemBadge";
-import textStyles from "../../../styles/textStyles";
 
 const rem = 16;
 

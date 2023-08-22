@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import LogoBaro from '../../assets/logo_baro.png';
 
 export default function BaroPath() {

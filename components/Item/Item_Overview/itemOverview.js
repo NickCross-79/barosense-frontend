@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
     blurOverlay: {
         width: '100%',
-        height: '100%',
+        height: overlayHeight,
         position: 'absolute',
         zIndex: 3,
         justifyContent: 'center',
