@@ -28,10 +28,12 @@ export default function ItemOverview({item=null, handleClose}) {
                     </TouchableOpacity>
                 </View>
                 
-                <Image
-                    source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
-                    style={styles.itemImage}
-                />
+                <View style={{borderColor: '#7D9699', borderWidth: 1, borderRadius: 8}}>
+                    <Image
+                        source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+                        style={styles.itemImage}
+                    />
+                </View>
                 <View style={[styles.rowContainer,{marginTop: 1.25 * rem}]}>
                     <Text style={textStyles.h1}>{item.name}</Text>
                     <View style={{borderRadius: 10, width: 4, height: 4, backgroundColor: '#7D9699', marginHorizontal: 7, marginTop: 3}} />
