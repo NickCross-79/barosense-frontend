@@ -21,7 +21,7 @@ export default function ItemDetailsSection({item=null}) {
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={textStyles.h3}>Tradable:</Text>
-                            {<IconFalse width={20} height={20}/>}
+                            {item.is_tradable ? <IconTrue width={20} height={20} /> : <IconFalse width={20} height={20}/>}
                         </View>
                     </View>
                     
@@ -32,7 +32,7 @@ export default function ItemDetailsSection({item=null}) {
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={textStyles.h3}>Mastery:</Text>
-                            <IconFalse width={20} height={20}/>
+                            {item.can_master ? <IconTrue width={20} height={20}/> : <IconFalse width={20} height={20}/>}
                         </View> 
                     </View>
                     <View style={[styles.rowContainer, {marginTop: 0.5625 * rem, alignSelf: 'center'}]}>
