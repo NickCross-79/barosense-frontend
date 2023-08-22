@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, ScrollView, ImageBackground} from "react-native";
+import { Text, View, StyleSheet, Image, ScrollView, ImageBackground, TouchableOpacity} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import BackgroundNewItem from '../../../assets/backgrounds/background_newItem.png'
 import NewItemBadge from "./newItemBadge";
@@ -6,30 +6,32 @@ import textStyles from "../../../styles/textStyles";
 
 const rem = 16;
 
-export default function NewItem({item=null}) {
+export default function NewItem({item=null, onPress}) {
     return(
-        <ImageBackground
-            source={BackgroundNewItem}
-            style={styles.container}
-            imageStyle={styles.imageBackground}
-            blurRadius={8}
-        >
-            {item.thumbnail != undefined && <Image
-                    source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
-                    style={styles.newItemImage}
-                />}
-            <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x:0, y:1}}
-                locations={[0, 1]}
-                style={styles.overlay}
-                colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.60)']}
-            >   
-                <NewItemBadge />
-                {item.name != undefined && <Text style={styles.name}>{item.name}</Text>}
-                {item.name != undefined && <Text style={styles.category}>{item.type}</Text>}
-            </LinearGradient>
-        </ImageBackground>
+        <TouchableOpacity onPress={() => onPress(item)}>
+            <ImageBackground
+                source={BackgroundNewItem}
+                style={styles.container}
+                imageStyle={styles.imageBackground}
+                blurRadius={8}
+            >
+                {item.thumbnail != undefined && <Image
+                        source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+                        style={styles.newItemImage}
+                    />}
+                <LinearGradient
+                    start={{x: 0, y: 0}}
+                    end={{x:0, y:1}}
+                    locations={[0, 1]}
+                    style={styles.overlay}
+                    colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.60)']}
+                >   
+                    <NewItemBadge />
+                    {item.name != undefined && <Text style={styles.name}>{item.name}</Text>}
+                    {item.name != undefined && <Text style={styles.category}>{item.type}</Text>}
+                </LinearGradient>
+            </ImageBackground>
+        </TouchableOpacity>
     )
 }
 

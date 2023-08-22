@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native'; // Import ScrollView and SafeAreaView
+import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'; // Import ScrollView and SafeAreaView
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 import BaroTracker from './components/baroTracker';
@@ -66,7 +66,7 @@ export default function App() {
         <>
         {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
         {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-        {newItem && <NewItem item={newItem}/>}
+        {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
         
         {activeState && (<>
           <View contentContainerStyle={styles.content}>
