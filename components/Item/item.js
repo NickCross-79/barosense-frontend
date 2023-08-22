@@ -7,7 +7,6 @@ import textStyles from '../../styles/textStyles';
 const rem = 16;
 
 const Item = ({item=null, onPress}) => {
-  console.log(item.id)
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
     <View style={styles.container}>

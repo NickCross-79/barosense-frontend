@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Image, ScrollView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { BlurView } from 'expo-blur';
 import IconClose from '../../../assets/icons/icon_close.svg';
 import textStyles from '../../../styles/textStyles';
@@ -11,46 +11,53 @@ const overlayHeight = Dimensions.get('window').height - (1.75 * rem);
 
 export default function ItemOverview({item=null, handleClose}) {
     return (
-            <BlurView intensity={6} style={styles.blurOverlay}>
-                <View style={styles.content}>
-                    <TouchableOpacity onPress={() => handleClose()}>
-                        <IconClose style={{alignSelf: 'flex-end'}} />
-                    </TouchableOpacity>
-                    <Image
-                        source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
-                        style={styles.itemImage}
-                    />
-                    <View style={[styles.rowContainer,{marginTop: 1.25 * rem}]}>
-                        <Text style={textStyles.h1}>{item.name}</Text>
-                        <View style={{borderRadius: 10, width: 4, height: 4, backgroundColor: '#7D9699', marginHorizontal: 7, marginTop: 3}} />
-                        <Text style={[textStyles.h3,styles.wikiLink]}>See on wiki</Text>
-                    </View>
-                    <Text style={[textStyles.h1, {color: '#7D9699'}]}>{item.type}</Text>
-                    <ScrollView>
-                        <Text style={[textStyles.h2, styles.description]}>{item.description}</Text>
-                        
-                        {/* Recommend */}
-                        <RecommendedSection />
+        <View style={styles.blurOverlay}>
+            <TouchableWithoutFeedback onPress={() => handleClose()}>
+            <BlurView intensity={6} style={styles.blurOverlay} /> 
+            </TouchableWithoutFeedback>
 
-                        {/* Details */}
-                        <ItemDetailsSection item={item} />
-
-                        {/* Comments */}
-
-                        <ItemCommentSection />
-                    </ScrollView>
-                    <View style={styles.commentBox}>
-                        <View style={styles.rowContainer}>
-                            <Text style={[textStyles.h3, {color: '#9F9F9F'}]}>Add a comment...</Text>
-                        </View>
-                    </View> 
+            {/* Details Pane */}
+            <View style={styles.content}>
+                <TouchableOpacity onPress={() => handleClose()}>
+                    <IconClose style={{alignSelf: 'flex-end'}} />
+                </TouchableOpacity>
+                <Image
+                    source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
+                    style={styles.itemImage}
+                />
+                <View style={[styles.rowContainer,{marginTop: 1.25 * rem}]}>
+                    <Text style={textStyles.h1}>{item.name}</Text>
+                    <View style={{borderRadius: 10, width: 4, height: 4, backgroundColor: '#7D9699', marginHorizontal: 7, marginTop: 3}} />
+                    <Text style={[textStyles.h3,styles.wikiLink]}>See on wiki</Text>
                 </View>
-            </BlurView>
+                <Text style={[textStyles.h1, {color: '#7D9699'}]}>{item.type}</Text>
+                <ScrollView>
+                    <Text style={[textStyles.h2, styles.description]}>{item.description}</Text>
+                    
+                    {/* Recommend */}
+                    <RecommendedSection />
+
+                    {/* Details */}
+                    <ItemDetailsSection item={item} />
+
+                    {/* Comments */}
+
+                    <ItemCommentSection />
+                </ScrollView>
+                <View style={styles.commentBox}>
+                    <View style={styles.rowContainer}>
+                        <Text style={[textStyles.h3, {color: '#9F9F9F'}]}>Add a comment...</Text>
+                    </View>
+                </View> 
+            </View>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     content: {
+        position: 'absolute',
+        zIndex: 4,
         width: 21.5625 * rem,
         height: 34.25 * rem,
         marginBottom: 35,

@@ -3,6 +3,7 @@ import textStyles from '../../../styles/textStyles';
 import IconDucats from '../../../assets/icons/icon_ducats.png';
 import IconCredits from '../../../assets/icons/icon_credits.png';
 import IconFalse from '../../../assets/icons/icon_false.svg';
+import IconTrue from '../../../assets/icons/icon_true.svg';
 
 const rem = 16;
 
@@ -20,7 +21,7 @@ export default function ItemDetailsSection({item=null}) {
                         </View>
                         <View style={styles.rowContainer}>
                             <Text style={textStyles.h3}>Tradable:</Text>
-                            <IconFalse width={20} height={20}/>
+                            {<IconFalse width={20} height={20}/>}
                         </View>
                     </View>
                     
