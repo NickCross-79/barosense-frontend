@@ -10,6 +10,7 @@ import NavBar from './components/navBar';
 import axios from 'axios';
 import {SERVER_ADDRESS} from '@env';
 import ItemOverview from './components/Item/Item_Overview/itemOverview';
+import BaroPath from './components/Inactive/baroPath';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
@@ -48,8 +49,6 @@ export default function App() {
         setItems(itemData.data.items);
         setNewItem(newItemData.data);
       } catch (err) {
-        const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
-        setBaroData(baroDataResp.data);
         console.error('Error fetching baroData:',err);
       }
     }
@@ -64,17 +63,17 @@ export default function App() {
     <SafeAreaView style={styles.container}>
         {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
         <>
-        {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-        {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-        {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
-        
-        {activeState && (<>
-          <View contentContainerStyle={styles.content}>
-            {thisWeeksItemsComponent}
-          </View>
-        </>)}
-        <NavBar />
-        <StatusBar style="auto" />
+          {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+          {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+          {/*newItem*/false && <NewItem item={newItem} onPress={handleItemPress}/>}
+          <BaroPath />
+          {!activeState && (<>
+            <View contentContainerStyle={styles.content}>
+              {thisWeeksItemsComponent}
+            </View>
+          </>)}
+          <NavBar />
+          <StatusBar style="auto" />
         </>
     </SafeAreaView>
   );
