@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'; // Import ScrollView and SafeAreaView
+import { StyleSheet, SafeAreaView} from 'react-native'; // Import ScrollView and SafeAreaView
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 import BaroTracker from './components/baroTracker';
-import NewItem from './components/Home/NewItem/newItem';
-import ThisWeeksItems from './components/Home/ThisWeeksItems/thisWeeksItems';
 import NavBar from './components/navBar';
 import axios from 'axios';
 import {SERVER_ADDRESS} from '@env';
 import ItemOverview from './components/Item/Item_Overview/itemOverview';
 import BaroPath from './components/Inactive/baroPath';
+import Home from './components/Home/home';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
@@ -20,8 +19,6 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
-  
-  const activeState = true;
 
   const handleItemPress = (item) => {
     setSelectedItem(item);
@@ -30,13 +27,6 @@ export default function App() {
   const handleOverviewClose = () => {
     setSelectedItem(null);
   }
-
-  const thisWeeksItemsComponent = useMemo(() => {
-    if(items) {
-      return <ThisWeeksItems items={items} onItemPress={handleItemPress} />
-    }
-    return null
-  }, [items]);
 
   useEffect(() => {
     async function fetchBaroData() {
@@ -62,19 +52,8 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
         {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
-        <>
-          {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-          {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-          {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
-          {false && <BaroPath />}
-          {activeState && (<>
-            <View contentContainerStyle={styles.content}>
-              {thisWeeksItemsComponent}
-            </View>
-          </>)}
-          <NavBar />
-          <StatusBar style="auto" />
-        </>
+        {baroData && <Home baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
+        <NavBar />
     </SafeAreaView>
   );
 }

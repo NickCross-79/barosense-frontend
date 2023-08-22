@@ -1,0 +1,62 @@
+import React, { useMemo } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, View } from 'react-native'; // Import ScrollView and SafeAreaView
+import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
+import BaroTracker from '../baroTracker';
+import AppLoading from 'expo-app-loading';
+import NewItem from './NewItem/newItem';
+import ThisWeeksItems from './ThisWeeksItems/thisWeeksItems';
+import BaroPath from '../Inactive/baroPath';
+
+export default function Home({baroData, items, newItem, handleItemPress}) {
+  const [fontsLoaded] = useFonts({
+    Montserrat_400Regular
+  });
+  
+  const activeState = true;
+
+  const thisWeeksItemsComponent = useMemo(() => {
+    if(items) {
+      return <ThisWeeksItems items={items} onItemPress={handleItemPress} />
+    }
+    return null
+  }, [items]);
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
+  return (
+    <View style={styles.container}>
+        <>
+          {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+          {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+          {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
+          {false && <BaroPath />}
+          {activeState && (<>
+            <View contentContainerStyle={styles.content}>
+              {thisWeeksItemsComponent}
+            </View>
+          </>)}
+          <StatusBar style="auto" />
+        </>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'black', // Set a background color to SafeAreaView
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  content: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24, // Add some top padding for better spacing
+  },
+});
