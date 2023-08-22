@@ -5,6 +5,7 @@ import textStyles from '../../../styles/textStyles';
 import ItemDetailsSection from './itemDetailsSection';
 import RecommendedSection from './recommendSection';
 import ItemCommentSection from './itemCommentSection';
+import NewItemBadge from '../../Home/NewItem/newItemBadge';
 
 const rem = 16;
 const overlayHeight = Dimensions.get('window').height - (1.75 * rem);
@@ -18,9 +19,15 @@ export default function ItemOverview({item=null, handleClose}) {
 
             {/* Details Pane */}
             <View style={styles.content}>
-                <TouchableOpacity onPress={() => handleClose()}>
-                    <IconClose style={{alignSelf: 'flex-end'}} />
-                </TouchableOpacity>
+                <View style={[styles.rowContainer, {justifyContent: 'space-between'}]}>
+                    <View>
+                        {item.is_new && <NewItemBadge />}
+                    </View>
+                    <TouchableOpacity onPress={() => handleClose()}>
+                        <IconClose />
+                    </TouchableOpacity>
+                </View>
+                
                 <Image
                     source={{uri: `data:image/jpeg;base64,${item.thumbnail}`}}
                     style={styles.itemImage}
