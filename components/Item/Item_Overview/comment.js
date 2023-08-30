@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
         marginTop: 15,
         width: '100%',
         height: 1,
-        backgroundColor: '#7D9699',
+        backgroundColor: '#6D6D6D',
     }
 });

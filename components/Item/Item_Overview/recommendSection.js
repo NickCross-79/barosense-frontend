@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     verticalSeperator: {
         width: 1,
         height: 4.125 * rem,
-        backgroundColor: '#7D9699',
+        backgroundColor: '#6D6D6D',
         borderRadius: 10,
     }
 });

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     horizontalSeperator: {
         height: 1,
         width: '100%',
-        backgroundColor: '#7D9699',
+        backgroundColor: '#6D6D6D',
         borderRadius: 10,
     },
     icon: {

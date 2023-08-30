@@ -6,6 +6,7 @@ import ItemDetailsSection from './itemDetailsSection';
 import RecommendedSection from './recommendSection';
 import ItemCommentSection from './itemCommentSection';
 import NewItemBadge from '../../Home/NewItem/newItemBadge';
+import IconFilter from '../../../assets/icons/icon_filter.svg'
 
 const rem = 16;
 const overlayHeight = Dimensions.get('window').height - (1.75 * rem);
@@ -40,7 +41,7 @@ export default function ItemOverview({item=null, handleClose}) {
                     <Text style={[textStyles.h3,styles.wikiLink]}>See on wiki</Text>
                 </View>
                 <Text style={[textStyles.h1, {color: '#7D9699'}]}>{item.type}</Text>
-                <ScrollView>
+                <ScrollView stickyHeaderIndices={[3]}>
                     <Text style={[textStyles.h2, styles.description]}>{item.description}</Text>
                     
                     {/* Recommend */}
@@ -50,7 +51,16 @@ export default function ItemOverview({item=null, handleClose}) {
                     <ItemDetailsSection item={item} />
 
                     {/* Comments */}
-
+                    <View style={{backgroundColor: '#213235'}}>
+                        <View style={[styles.rowContainer, {justifyContent: 'space-between', marginTop: 10}]}>
+                            <Text style={textStyles.h2}>Comments</Text>
+                            <View style={styles.rowContainer}>
+                                <IconFilter width={rem} height={rem} marginRight={6}/>
+                                <Text style={[textStyles.h3]}>Filter</Text>
+                            </View>
+                        </View>
+                        <View style={[styles.horizontalSeperator, {marginVertical: 0.625 * rem}]} />
+                    </View>
                     <ItemCommentSection />
                 </ScrollView>
                 <View style={styles.commentBox}>
@@ -130,13 +140,13 @@ const styles = StyleSheet.create({
     verticalSeperator: {
         width: 1,
         height: 4.125 * rem,
-        backgroundColor: '#7D9699',
+        backgroundColor: '#6D6D6D',
         borderRadius: 10,
     },
     horizontalSeperator: {
         height: 1,
         width: '100%',
-        backgroundColor: '#7D9699',
+        backgroundColor: '#6D6D6D',
         borderRadius: 10,
     },
     icon: {
