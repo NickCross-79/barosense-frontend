@@ -8,7 +8,7 @@ import NewItem from './NewItem/newItem';
 import ThisWeeksItems from './ThisWeeksItems/thisWeeksItems';
 import BaroPath from '../Inactive/baroPath';
 
-export default function Home({baroData, items, newItem, handleItemPress}) {
+export default function Home({inventory, baroData, items, newItem, handleItemPress}) {
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
@@ -16,11 +16,11 @@ export default function Home({baroData, items, newItem, handleItemPress}) {
   const activeState = true;
 
   const thisWeeksItemsComponent = useMemo(() => {
-    if(items) {
-      return <ThisWeeksItems items={items} onItemPress={handleItemPress} />
+    if(inventory) {
+      return <ThisWeeksItems items={inventory} onItemPress={handleItemPress} />
     }
     return null
-  }, [items]);
+  }, [inventory]);
 
   if (!fontsLoaded) {
     return <AppLoading />;

@@ -16,6 +16,8 @@ export default function App() {
   const [items, setItems] = useState(null);
   const [newItem, setNewItem] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [baroInventory, setBaroInventroy] = useState(null);
+
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
@@ -31,13 +33,15 @@ export default function App() {
   useEffect(() => {
     async function fetchBaroData() {
       try {
-        //console.log(SERVER_ADDRESS)
-        const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
+        console.log(SERVER_ADDRESS)
         const newItemData = await axios.get(SERVER_ADDRESS+`/api/baro/inventory/newItem`);
+        const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
+        const baroInventoryData = await axios.get(SERVER_ADDRESS+'/api/baro/inventory');
         setBaroData(baroDataResp.data);
         setItems(itemData.data.items);
         setNewItem(newItemData.data);
+        setBaroInventroy(baroInventoryData.data.inventory);
       } catch (err) {
         console.error('Error fetching baroData:',err);
       }
@@ -52,7 +56,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
         {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
-        {baroData && <Home baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
+        {baroData && <Home inventory={baroInventory} baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
         <NavBar />
     </SafeAreaView>
   );

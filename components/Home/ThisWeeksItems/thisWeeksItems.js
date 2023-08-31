@@ -26,7 +26,7 @@ const ThisWeeksItems = ({items=null, onItemPress=()=>{}}) => {
           <FlatList
             data={items}
             renderItem={renderItem}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item) => item.uniqueName}
             numColumns={1}
             contentContainerStyle={styles.itemContainer}
           />
