@@ -32,7 +32,7 @@ export default function Home({inventory, baroData, items, newItem, handleItemPre
           {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
           {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
           {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
-          {false && <BaroPath />}
+          {!baroData.active && <BaroPath baroData={baroData} />}
           {activeState && (<>
             <View contentContainerStyle={styles.content}>
               {thisWeeksItemsComponent}
