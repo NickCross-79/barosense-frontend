@@ -29,11 +29,11 @@ export default function Home({inventory, baroData, items, newItem, handleItemPre
   return (
     <View style={styles.container}>
         <>
-          {!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
+          {/*!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />*/}
           {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-          {newItem && <NewItem item={newItem} onPress={handleItemPress}/>}
+          {newItem && baroData.active && <NewItem item={newItem} onPress={handleItemPress}/>}
           {!baroData.active && <BaroPath baroData={baroData} />}
-          {activeState && (<>
+          {baroData.active && (<>
             <View contentContainerStyle={styles.content}>
               {thisWeeksItemsComponent}
             </View>
