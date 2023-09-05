@@ -13,7 +13,7 @@ export default function Home({inventory, baroData, items, newItem, handleItemPre
     Montserrat_400Regular
   });
   
-  const activeState = true;
+  const activeState = baroData.active;
 
   const thisWeeksItemsComponent = useMemo(() => {
     if(inventory) {
@@ -31,9 +31,9 @@ export default function Home({inventory, baroData, items, newItem, handleItemPre
         <>
           {/*!activeState && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />*/}
           {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={activeState} location={baroData.location} />}
-          {newItem && baroData.active && <NewItem item={newItem} onPress={handleItemPress}/>}
-          {!baroData.active && <BaroPath baroData={baroData} />}
-          {baroData.active && (<>
+          {newItem && activeState && <NewItem item={newItem} onPress={handleItemPress}/>}
+          {!activeState && <BaroPath baroData={baroData} />}
+          {activeState && (<>
             <View contentContainerStyle={styles.content}>
               {thisWeeksItemsComponent}
             </View>
