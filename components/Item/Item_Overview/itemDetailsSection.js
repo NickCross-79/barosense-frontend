@@ -11,7 +11,7 @@ export default function ItemDetailsSection({item=null}) {
     return (
         <View>
             <View style={styles.horizontalSeperator}/>
-            <Text style={[textStyles.h3, styles.sectionHeader]}>Details</Text>
+            {/* <Text style={[textStyles.h3, styles.sectionHeader]}>Details</Text> */}
             <View style={[styles.columnContainer, {justifyContent: 'space-between', alignSelf: 'center', width: '90%'}]}>
 
                     <View style={[styles.rowContainer, {justifyContent: 'space-between'}]}>

@@ -17,7 +17,7 @@ const ThisWeeksItems = ({items=null, onItemPress=()=>{}}) => {
 
   return (
     <>
-      <View style={[styles.rowContainer, {marginBottom: 10}]}>
+      <View style={[styles.rowContainer, {paddingBottom: 10, borderBottomColor: '#213235', borderBottomWidth: 1}]}>
         <Text style={[textStyles.h1, styles.header]}>This Week's Items</Text>
         <IconFilter />
         <Text style={styles.filter}>Filters</Text>

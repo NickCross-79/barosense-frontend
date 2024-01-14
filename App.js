@@ -7,9 +7,11 @@ import BaroTracker from './components/baroTracker';
 import NavBar from './components/navBar';
 import axios from 'axios';
 import {SERVER_ADDRESS} from '@env';
-import ItemOverview from './components/Item/Item_Overview/itemOverview';
+import ItemOverview from './components/Item/Item_Overview/itemOverviewV2';
 import BaroPath from './components/Inactive/baroPath';
 import Home from './components/Home/home';
+import Vault from './components/Vault/vault'
+import NavBarV2 from './components/navBarV2';
 
 export default function App() {
   const [baroData, setBaroData] = useState(null);
@@ -33,7 +35,6 @@ export default function App() {
   useEffect(() => {
     async function fetchBaroData() {
       try {
-        console.log(SERVER_ADDRESS)
         const newItemData = await axios.get(SERVER_ADDRESS+`/api/baro/inventory/newItem`);
         const baroDataResp = await axios.get(SERVER_ADDRESS+'/api/baro');
         const itemData = await axios.get(SERVER_ADDRESS+'/api/items');
@@ -55,8 +56,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+        {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={baroData.active} location={baroData.location} />}
         {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
-        {baroData && <Home inventory={baroInventory} baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
+        {/*baroData && <Vault items={items} handleItemPress={handleItemPress}/>*/ <Home inventory={baroInventory} baroData={baroData} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
         <NavBar />
     </SafeAreaView>
   );

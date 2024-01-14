@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Home from "./Home/home";
+import Vault from "./Vault/vault";
 import IconHomeActive from '../assets/icons/icon_home_active.svg';
 import IconHeartInactive from '../assets/icons/icon_heart_inactive.svg';
 import IconListInactive from '../assets/icons/icon_list_inactive.svg';
@@ -41,7 +45,7 @@ export default function NavBar() {
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        backgroundColor: 'rgba(0, 0, 0, 0.80)',
+        backgroundColor: 'rgba(0, 0, 0, 0.60)',
         height: 4.25 * rem,
         position: 'absolute',
         zIndex: 3,
