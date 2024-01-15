@@ -12,7 +12,7 @@ const ItemList = ({items=null, onItemPress=()=>{}}) => {
   const handleItemPress = (item) => {
     onItemPress(item);
   }
-
+  //console.log("vault:",items[0])
   return (
     <>
       <ScrollView contentContainerStyle={styles.container}>
@@ -30,8 +30,9 @@ const ItemList = ({items=null, onItemPress=()=>{}}) => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'black',
     alignItems: 'center',
-    paddingTop: 20, // Add top padding for better spacing
+    paddingTop: 100, // Add top padding for better spacing
     paddingBottom: 350, // Add bottom padding for better spacing
   },
   itemContainer: {

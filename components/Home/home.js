@@ -6,14 +6,19 @@ import BaroTracker from '../baroTracker';
 import AppLoading from 'expo-app-loading';
 import NewItem from './NewItem/newItem';
 import ThisWeeksItems from './ThisWeeksItems/thisWeeksItems';
-import BaroPath from '../Inactive/baroPath';
+import BaroPath from './Inactive/baroPath';
 
-export default function Home({inventory, baroData, newItem, handleItemPress}) {
+export default function Home({/*inventory, baroData, newItem, handleItemPress*/route}) {
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
-  
-  const activeState = true//baroData.active;
+  const {params} = route
+  const inventory = params.inventory;
+  const baroData = params.baroData;
+  const newItem = params.newItem;
+  const handleItemPress = params.handleItemPress;
+  console.log("home component",baroData)
+  const activeState = baroData.active;
 
   const thisWeeksItemsComponent = useMemo(() => {
     if(inventory) {

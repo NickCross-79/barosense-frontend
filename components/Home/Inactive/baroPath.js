@@ -1,7 +1,7 @@
 import { View, StyleSheet, Image } from 'react-native';
-import LogoBaro from '../../assets/logo_baro.png';
-import IconEarth from '../../assets/icons/icon_earth.svg'
-import IconBaroPathDot from '../../assets/icons/icon_baroPathDot.svg'
+import LogoBaro from '../../../assets/logo_baro.png'//'../../assets/logo_baro.png';
+import IconEarth from '../../../assets/icons/icon_earth.svg'
+import IconBaroPathDot from '../../../assets/icons/icon_baroPathDot.svg'
 
 export default function BaroPath({baroData}) {
 

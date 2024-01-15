@@ -4,7 +4,11 @@ import textStyles from "../../styles/textStyles";
 
 const rem = 16
 
-export default function Vault({items=null,handleItemPress}){
+export default function Vault({/*items=null,handleItemPress=null*/ route}){
+    const { params } = route;
+    const items = params.items;
+    const handleItemPress = params.handleItemPress;
+    console.log(items[0])
     return(
         <>
             <ItemList items={items} onItemPress={handleItemPress}/>

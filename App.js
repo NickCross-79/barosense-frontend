@@ -8,7 +8,7 @@ import NavBar from './components/navBar';
 import axios from 'axios';
 import {SERVER_ADDRESS} from '@env';
 import ItemOverview from './components/Item/Item_Overview/itemOverviewV2';
-import BaroPath from './components/Inactive/baroPath';
+import BaroPath from './components/Home/Inactive/baroPath';
 import Home from './components/Home/home';
 import Vault from './components/Vault/vault'
 import NavBarV2 from './components/navBarV2';
@@ -57,9 +57,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
         {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={baroData.active} location={baroData.location} />}
-        {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
-        {/*baroData && <Vault items={items} handleItemPress={handleItemPress}/>*/ <Home inventory={baroInventory} baroData={baroData} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
-        <NavBar />
+        {/*selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />*/}
+        {/*baroData && <Home inventory={baroInventory} baroData={baroData} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>*/}
+        {baroData && items && newItem && baroInventory && <NavBarV2 baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress}/>}
     </SafeAreaView>
   );
 }
@@ -67,7 +67,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    //alignItems: 'center',
     backgroundColor: 'black', // Set a background color to SafeAreaView
   },
   backgroundImage: {
