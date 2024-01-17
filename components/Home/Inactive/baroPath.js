@@ -29,8 +29,8 @@ export default memo( function BaroPath({ baroData }) {
                     transition={{
                         loop: true,
                         type: 'timing',
-                        duration: 3000,
-                        delay: (i*100),
+                        duration: 2500,
+                        delay: (i*160),
                     }}
                 >
                     <IconBaroPathDot style={styles.baroPathDot} />
