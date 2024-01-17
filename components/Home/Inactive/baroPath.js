@@ -3,19 +3,18 @@ import LogoBaro from '../../../assets/logo_baro.png'//'../../assets/logo_baro.pn
 import IconEarth from '../../../assets/icons/icon_earth.svg'
 import IconBaroPathDot from '../../../assets/icons/icon_baroPathDot.svg'
 import { MotiView } from 'moti';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
-export default function BaroPath({ baroData }) {
-    const isFocused = useIsFocused();
-    const [reset, setReset] = useState(false);
+export default memo( function BaroPath({ baroData }) {
+    
     const daysUntilArrival = (activation) => {
         return Math.ceil((new Date(activation) - new Date()) / (1000 * 3600 * 24));
     }
     const daysLeft = daysUntilArrival(baroData.activation)
 
     const renderPath = () => {
-        const path = []
+        const path = [];
         for (let i = 0; i < daysLeft; i++) {
             path.push(
                 <MotiView
@@ -30,7 +29,7 @@ export default function BaroPath({ baroData }) {
                     transition={{
                         loop: true,
                         type: 'timing',
-                        duration: 1500,
+                        duration: 3000,
                         delay: (i*100),
                     }}
                 >
@@ -41,10 +40,6 @@ export default function BaroPath({ baroData }) {
         return path
     }
 
-    useEffect(() => {
-        setReset(!reset);
-    },[isFocused])
-
     return (
         <View style={styles.content}>
             <Image
@@ -54,7 +49,7 @@ export default function BaroPath({ baroData }) {
             <IconEarth />
         </View>
     )
-}
+})
 
 const styles = StyleSheet.create({
     content: {
