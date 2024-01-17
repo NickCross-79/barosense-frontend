@@ -44,7 +44,7 @@ export default function NavBarV2({baroData, items, newItem, handleItemPress, han
                 })}
                 
             >
-                <Tab.Screen name={"Home"} component={Home} initialParams={{inventory: null, baroData: baroData, newItem: newItem, handleItemPress: null}}/>
+                <Tab.Screen name={"Home"} unmountOnBlur={false} component={Home} initialParams={{inventory: null, baroData: baroData, newItem: newItem, handleItemPress: null}}/>
                 <Tab.Screen name={"All Items"} component={Vault} initialParams={{items: items, handleItemPress: handleItemPress}} />
 
             </Tab.Navigator>

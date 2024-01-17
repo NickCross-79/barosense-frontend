@@ -25,7 +25,7 @@ const ItemList = ({ items = null, onItemPress = () => { } }) => {
   }
 
   const renderItem = ({ item }) => (
-    <Item item={item} onPress={handleItemPress} />
+    <Item key={item.id} item={item} onPress={handleItemPress} />
   )
 
   const handleItemPress = (item) => {
