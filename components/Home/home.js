@@ -8,20 +8,19 @@ import NewItem from './NewItem/newItem';
 import ThisWeeksItems from './ThisWeeksItems/thisWeeksItems';
 import BaroPath from './Inactive/baroPath';
 
-export default function Home({/*inventory, baroData, newItem, handleItemPress*/route}) {
+export default function Home({/*inventory, baroData, newItem, handleItemPress*/route }) {
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular
   });
-  const {params} = route
+  const { params } = route
   const inventory = params.inventory;
   const baroData = params.baroData;
   const newItem = params.newItem;
   const handleItemPress = params.handleItemPress;
-  console.log("home component",baroData)
   const activeState = baroData.active;
 
   const thisWeeksItemsComponent = useMemo(() => {
-    if(inventory) {
+    if (inventory) {
       return <ThisWeeksItems items={inventory} onItemPress={handleItemPress} />
     }
     return null
@@ -33,16 +32,16 @@ export default function Home({/*inventory, baroData, newItem, handleItemPress*/r
 
   return (
     <View style={styles.container}>
-        <>
-          {newItem && activeState && <NewItem item={newItem} onPress={handleItemPress}/>}
-          {!activeState && <BaroPath baroData={baroData} />}
-          {activeState && (<>
-            <View contentContainerStyle={styles.content}>
-              {thisWeeksItemsComponent}
-            </View>
-          </>)}
-          <StatusBar style="auto" />
-        </>
+      <>
+        {newItem && activeState && <NewItem item={newItem} onPress={handleItemPress} />}
+        {!activeState && <BaroPath baroData={baroData} />}
+        {activeState && (<>
+          <View contentContainerStyle={styles.content}>
+            {thisWeeksItemsComponent}
+          </View>
+        </>)}
+        <StatusBar style="auto" />
+      </>
     </View>
   );
 }

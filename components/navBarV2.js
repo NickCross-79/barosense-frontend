@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTheme } from 'react-native-paper';
 import { View, Text, StyleSheet, Image } from "react-native";
 import { BlurView } from "expo-blur";
@@ -15,11 +15,12 @@ import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 const Tab = createMaterialBottomTabNavigator();
 const rem = 16;
 
-export default function NavBarV2({baroData, items, newItem, handleItemPress}) {
+export default function NavBarV2({baroData, items, newItem, handleItemPress, handleOverviewClose}) {
+    
     const theme = useTheme();
     theme.colors.secondaryContainer = 'transparent';
     return (
-        <NavigationContainer>
+        <NavigationContainer style={{backgroundColor:'yellow'}}>
             <Tab.Navigator
                 unmountOnBlur={false}
                 lazy={false}

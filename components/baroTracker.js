@@ -54,6 +54,7 @@ export default function BaroTracker({nextDate=null, expiry=null, active=false, l
 
 const styles = StyleSheet.create({
   content: {
+    alignSelf: 'center',
     marginTop: 1.5 * rem,
     backgroundColor: '#213235',
     width: 21.5625 * rem,

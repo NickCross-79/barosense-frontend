@@ -57,9 +57,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
         {baroData && <BaroTracker nextDate={baroData.activation} expiry={baroData.expiry} active={baroData.active} location={baroData.location} />}
-        {/*selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />*/}
+        {selectedItem && <ItemOverview item={selectedItem} handleClose={handleOverviewClose} />}
         {/*baroData && <Home inventory={baroInventory} baroData={baroData} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>*/}
-        {baroData && items && newItem && baroInventory && <NavBarV2 baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress}/>}
+        {baroData && items && newItem && baroInventory && <NavBarV2 baroData={baroData} items={items} newItem={newItem} handleItemPress={handleItemPress} handleOverviewClose={handleOverviewClose}/>}
     </SafeAreaView>
   );
 }
