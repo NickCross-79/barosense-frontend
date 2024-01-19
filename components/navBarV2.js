@@ -15,41 +15,57 @@ import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 const Tab = createMaterialBottomTabNavigator();
 const rem = 16;
 
-export default function NavBarV2({baroData, items, newItem, handleItemPress, handleOverviewClose}) {
+export default function NavBarV2({ baroData, items, newItem, handleItemPress, handleOverviewClose }) {
+
+    const TabBarBlur = () => {
+        console.log('test')
+        return (
+            <View style={{flex: 1}}>
+            <View style={styles.tabBar}>
+                <BlurView intensity={6} style={styles.tabBlur} />
+            </View>
+            </View>
+        )
+    }
     
     const theme = useTheme();
     theme.colors.secondaryContainer = 'transparent';
     return (
-        <NavigationContainer style={{backgroundColor:'yellow'}}>
+        <NavigationContainer style={{ backgroundColor: 'yellow' }}>
             <Tab.Navigator
                 unmountOnBlur={false}
                 lazy={false}
                 activeColor="white"
-                barStyle={{backgroundColor: 'transparent'}}
+                barStyle={{ position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.50)' }}
                 shifting={true}
                 initialRouteName={"Home"}
-                screenOptions={({route}) => ({
-                    tabBarIcon: ({focused, color, size}) => {
+                screenOptions={({ route }) => ({
+                    tabBarBackground: () => (
+                        <BlurView
+                            intensity={80}
+                            style={styles.tabBlur}
+                        />
+                    ),
+                    tabBarIcon: ({ focused, color, size }) => {
                         let icon = null;
                         let rn = route.name;
-
-                        if(rn == "Home") {
-                            icon = focused ? <IconHomeActive style={styles.icon}/> : <IconHomeInactive style={styles.icon}/>
+                        if (rn == "Home") {
+                            icon = focused ? <IconHomeActive style={styles.icon} /> : <IconHomeInactive style={styles.icon} />
                         } else if (rn == "All Items") {
-                            icon = focused ? <IconListActive style={styles.icon}/> : <IconListInactive style={styles.icon}/>
+                            icon = focused ? <IconListActive style={styles.icon} /> : <IconListInactive style={styles.icon} />
                         }
 
                         return icon;
                     }
                 })}
-                
+
             >
-                <Tab.Screen name={"Home"} unmountOnBlur={false} component={Home} initialParams={{inventory: null, baroData: baroData, newItem: newItem, handleItemPress: null}}/>
-                <Tab.Screen name={"All Items"} component={Vault} initialParams={{items: items, handleItemPress: handleItemPress}} />
+                <Tab.Screen name={"Home"} unmountOnBlur={false} component={Home} initialParams={{ inventory: null, baroData: baroData, newItem: newItem, handleItemPress: null }} />
+                <Tab.Screen name={"All Items"} component={Vault} initialParams={{ items: items, handleItemPress: handleItemPress }} />
 
             </Tab.Navigator>
         </NavigationContainer>
-        
+
     );
 }
 
@@ -64,6 +80,20 @@ const styles = StyleSheet.create({
         bottom: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingHorizontal: 2 * rem,
+        paddingTop: 1.4 * rem,
+    },
+    tabBar: {
+        width: '100%',
+        height: 55,
+        borderRadius: 90,
+        overflow: 'hidden',
+    },
+    tabBlur: {
+        ...StyleSheet.absoluteFillObject,
+        width: "100%",
+        backgroundColor: 'transparent',
+        height: 4.25 * rem,
         paddingHorizontal: 2 * rem,
         paddingTop: 1.4 * rem,
     },
