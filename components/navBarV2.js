@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { BlurView } from "expo-blur";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./Home/home";
 import Vault from "./Vault/vault";
 import IconHomeActive from '../assets/icons/icon_home_active.svg';
@@ -12,7 +13,7 @@ import IconHeartInactive from '../assets/icons/icon_heart_inactive.svg';
 import IconListActive from '../assets/icons/icon_list_active.svg';
 import IconListInactive from '../assets/icons/icon_list_inactive.svg';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const rem = 16;
 
 export default function NavBarV2({ baroData, items, newItem, handleItemPress, handleOverviewClose }) {
@@ -21,9 +22,9 @@ export default function NavBarV2({ baroData, items, newItem, handleItemPress, ha
         console.log('test')
         return (
             <View style={{flex: 1}}>
-            <View style={styles.tabBar}>
-                <BlurView intensity={6} style={styles.tabBlur} />
-            </View>
+                <View style={styles.tabBar}>
+                    <BlurView intensity={10} style={styles.tabBlur} />
+                </View>
             </View>
         )
     }
@@ -31,20 +32,19 @@ export default function NavBarV2({ baroData, items, newItem, handleItemPress, ha
     const theme = useTheme();
     theme.colors.secondaryContainer = 'transparent';
     return (
-        <NavigationContainer style={{ backgroundColor: 'yellow' }}>
+        <NavigationContainer>
             <Tab.Navigator
                 unmountOnBlur={false}
                 lazy={false}
-                activeColor="white"
-                barStyle={{ position: 'absolute', backgroundColor: 'rgba(0, 0, 0, 0.50)' }}
                 shifting={true}
                 initialRouteName={"Home"}
                 screenOptions={({ route }) => ({
+                    headerShown: false,
+                    tabBarInactiveTintColor: 'grey',
+                    tabBarActiveTintColor: 'white',
+                    tabBarStyle: {marginBottom: '8%',position: 'absolute', marginHorizontal: '17%', borderColor: 'transparent'},
                     tabBarBackground: () => (
-                        <BlurView
-                            intensity={80}
-                            style={styles.tabBlur}
-                        />
+                        <TabBarBlur />
                     ),
                     tabBarIcon: ({ focused, color, size }) => {
                         let icon = null;
@@ -73,7 +73,7 @@ export default function NavBarV2({ baroData, items, newItem, handleItemPress, ha
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        backgroundColor: 'rgba(0, 0, 0, 0.60)',
+        backgroundColor: 'rgba(61, 53, 105, 0.4)',
         height: 4.25 * rem,
         position: 'absolute',
         zIndex: 3,
@@ -86,13 +86,15 @@ const styles = StyleSheet.create({
     tabBar: {
         width: '100%',
         height: 55,
-        borderRadius: 90,
+        borderRadius: 30,
+        borderTopColor: 'white',
+        borderBottomColor: 'white',
         overflow: 'hidden',
     },
     tabBlur: {
-        ...StyleSheet.absoluteFillObject,
+        flex: 1,
         width: "100%",
-        backgroundColor: 'transparent',
+        backgroundColor: ' rgba(0, 0, 0, 0.6)',
         height: 4.25 * rem,
         paddingHorizontal: 2 * rem,
         paddingTop: 1.4 * rem,
