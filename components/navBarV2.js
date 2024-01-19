@@ -19,7 +19,6 @@ const rem = 16;
 export default function NavBarV2({ baroData, items, newItem, handleItemPress, handleOverviewClose }) {
 
     const TabBarBlur = () => {
-        console.log('test')
         return (
             <View style={{flex: 1}}>
                 <View style={styles.tabBar}>
